@@ -1,0 +1,35 @@
+---
+title: "Dplyr (Exercises)"
+author: "Kenza Redwane"
+format: 
+  html:
+    code-fold: true
+---
+
+## Elementary Operations
+
+### Exercise 1
+
+```{r}
+#| message: false
+#| cache: true
+here::i_am("git-101-2024.Rproj")
+library(here)
+library(dplyr)
+```
+
+Question 1:
+```{r}
+  
+
+```
+
+Question 2:
+```{r}
+1 + 1
+```
+
+Question 3:
+```{r}
+1 + 1
+```
