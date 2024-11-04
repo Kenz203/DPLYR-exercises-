@@ -120,11 +120,22 @@ Question 3: Compute a boolean variable that is TRUE if the country (for a given 
 ```{r}
 life_expectancy %>%
   mutate(Atypical=`Both sexes`> median(`Both sexes`)+ 2*sd(`Both sexes`< median(`Both sexes`)-2*sd(`Both sexes`)))
-
-
 ```
-
-
 ## Summarising
 
 #### Exercise 6: Summarising
+
+Question 1: Compute the mean and median age of clients in the bank dataset.
+
+```{r}
+bank %>% summarise(Mean=mean(age), Median=median(age))
+```
+
+Question 2: compute the highest and the lowest life expectancy for each sex for the year 2015 (using the life expectancy at birth data set).
+```{r}
+life_expectancy %>%
+  filter(Year == 2015)%>%
+  summarise(Max_male=max(Male),Max_female=max(Female), Min_male=min(Male), Min_female=min(Female))
+```
+
+## Groouping
