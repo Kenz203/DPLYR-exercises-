@@ -13,7 +13,7 @@ format:
 ```{r}
 #| message: false
 #| cache: true
-here::i_am("git-101-2024.Rproj")
+here::i_am("git-101-2024/bank.csv")
 library(here)
 library(dplyr)
 ```
