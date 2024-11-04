@@ -137,5 +137,35 @@ life_expectancy %>%
   filter(Year == 2015)%>%
   summarise(Max_male=max(Male),Max_female=max(Female), Min_male=min(Male), Min_female=min(Female))
 ```
+## Grouping
 
-## Groouping
+### Exercise 7: Simple Grouping
+
+Question 1: Compute the median age of the clients in the bank data set as a function of their marital status.
+```{r}
+bank %>% 
+  group_by(marital) %>% summarise(Median=median(age))
+```
+
+Question 2: Compute the number of clients for each of the professions (job variable) in the bank data set.
+```{r}
+bank %>%
+  group_by(job)%>% summarise(Number_job=n())
+```
+
+Question 3:Compute the median, minimum and maximum life expectancy for women as a function of the year.
+```{r}
+life_expectancy %>%
+  group_by(Year) %>% 
+  summarise(Median_Female= median(Female), Minimum_Female = min(Female), Maximum_Female = max(Female))
+```
+
+Question 4: Find the countries that have an average life expectancy for both sexes over the time period that is smaller than the mean life expectancy minus two times its standard deviation.
+```{r}
+life_expectancy %>%
+  group_by(Country) %>%
+  mutate(mean(`Both sexes`)< mean(`Both sexes`)-2*sd(`Both sexes`))
+
+```
+
+### Exercise 8
