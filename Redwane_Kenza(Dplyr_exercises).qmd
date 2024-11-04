@@ -86,7 +86,7 @@ bank %>% select(marital, age) %>%
 
 ## Creating variables
 
-### Exercise 4:
+### Exercise 4: (Mutating)
 
 Question 1: Compute a new variable with the difference between the life expectancy of men and women.
 ```{r}
@@ -101,3 +101,30 @@ life_expectancy %>%
   mutate(Mean=(Difference = Male - Female)/ `Both sexes`)
 ```
 
+### Exercise 5: (Mutating with aggregtions)
+
+Question 1: Compute a new variable with the difference between the life expectancy of women and the median life expectancy of women in the whole data frame.
+```{r}
+life_expectancy %>%
+  mutate(Difference = Male - Female )
+```
+
+Question 2: Compute a new variable with the difference between the life expectancy of men and the mean life expectancy of men in the whole data frame, normalised by its standard deviation.
+```{r}
+life_expectancy %>%
+  mutate(Normalized_Difference =(Male-mean(Male))/sd(Male)) 
+
+```
+
+Question 3: Compute a boolean variable that is TRUE if the country (for a given year) is atypical with respect to the life expectancy (using the `Both sexes` column. This is the case if the life expectancy is larger than the median value plus twice the standard deviation or if it is small than the median value minus twice the standard deviation.
+```{r}
+life_expectancy %>%
+  mutate(Atypical=`Both sexes`> median(`Both sexes`)+ 2*sd(`Both sexes`< median(`Both sexes`)-2*sd(`Both sexes`)))
+
+
+```
+
+
+## Summarising
+
+#### Exercise 6: Summarising
