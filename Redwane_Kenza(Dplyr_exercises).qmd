@@ -188,17 +188,22 @@ bank %>%
 
 Question 1: Extract from the Life expectancy at birth data a sub table of countries for which the median life expectancy of men was strictly larger than 75 for the time period. We want the full data of those countries, even the years for which the life expectancy of male is lower than 75 (if they exists).
 ```{r}
-
+life_expectancy %>%
+  group_by(Male)%>%
+  filter(max(Male)>75)
 ```
 
 Question 2: Extract from the bank data set the sub table of clients whore are older than ten years plus the median age of their group, where the groups are defined by marital status and education level.
 ```{r}
-
+bank %>%
+  group_by(marital, education)%>%
+  filter(age>10+median(age))
 ```
 
 ### Exercise 10 (Pivoting)
 
-Question 1
+Question 1:
+
 
 Question 2
 
