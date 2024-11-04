@@ -40,31 +40,55 @@ summary(bank)
 
 ### Exercise 2:
 
-Question 1:
+Question 1: Extract clients of the bank that are at least 50 years old.
 ```{r}
+bank %>% filter(age>50)
+```
+
+Question 2: Print the number of clients who are married and have a secondary level of education.
+```{r}
+married_secondary<-bank %>%
+  filter(marital=='married' & education == 'secondary')
+nrow(married_secondary)
+```
+
+Question 3:  Print the summary of the subset of clients that are at most 25 and are single or have a tertiary level of education.
+```{r}
+single <-bank %>%
+  filter(age > 25, marital == 'single' & education=='tertiary')
+summary(single)
+```
+
+### Exercise 3: (Selecting)
+
+Question 1: Compare the results
+```{r}
+bank %>% select(age) %>% summary()
+```
+```{r}
+bank %>% pull(age) %>% summary()
+```
+💡 It's the same output that contains same informations, the only difference is that select is vertical which means we are extracting a column and pull returns the content as a simple vector (horizontal)
+
+
+Question 2: Print a summary of the bank data including only numerical variables.
+```{r}
+bank %>% select_if(is.numeric) %>% summary()
+```
+
+Question 3: Print the median age of the married clients.
+
+```{r}
+bank %>% select(marital, age) %>%
+  filter(marital== 'married') %>% 
+  summarise(median_age=median(age,na.rm = TRUE))
 
 ```
 
-Question 2:
+
+## Creating variables
+
+### Exercise 2:
+
+Question 1: Extract clients of the bank that are at least 50 years old.
 ```{r}
-
-```
-
-Question 3:
-```{r}
-
-```
-
-
-### Exercise 3:
-
-Question 1:
-```{r}
-
-```
-
-Question 2:
-
-Question 3:
-
-
