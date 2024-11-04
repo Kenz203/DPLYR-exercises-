@@ -199,13 +199,55 @@ bank %>%
   group_by(marital, education)%>%
   filter(age>10+median(age))
 ```
+## 6. Pivoting
 
 ### Exercise 10 (Pivoting)
 
 Question 1:
+```{r}
+library(tidyr)
+life_expectancy%>%
+  pivot_wider(names_from = Year,  values_from = c(Male, Female, `Both sexes`))
+```
+
+Question 2: compute the number of persons in groups of identical job and marital status, and arrange.
+```{r}
+bank %>%
+  group_by(job, marital)%>%
+  summarise(count=n())%>% 
+  ungroup() %>%
+  pivot_wider(names_from = marital,  values_from = count)
 
 
-Question 2
+```
 
 ### Exercise 11 (Advanced transformations)
 
+Question 1:Split the data set into data that describe each person and data related to payment. This should produce four tables, with only ID as a common variables:
+
+1. Table with the personal data such as the education level and the target variable default payment next month;
+```{r}
+
+```
+
+2. Table with the repayment status (columns starting with PAY and not with PAY_AMT);
+
+
+3. Table with the bill status (columns starting with BILL_AM
+
+
+4. Table with the payment status (columns starting with PAY_AMT).
+
+
+Question 2:In each of the payment oriented table, rename the columns with the month to which the value is associated (use the month.name variable).
+
+
+Question 3:Reformat the payment tables in long form. Make sure that the new column names make sense (for instance base the names on Month and Delay or Amount).
+
+Question 4: Use the Long forms
+
+1.
+
+2.
+
+3.
