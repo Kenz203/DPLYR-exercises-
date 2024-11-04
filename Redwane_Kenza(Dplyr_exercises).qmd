@@ -17,7 +17,7 @@ here::i_am("git-101-2024/bank.csv")
 library(here)
 library(dplyr)
 ```
-Question 1:
+Question 1: Print the name of the variables
 ```{r}
 library(readr)
 bank <- read_delim("/Users/macbookpro/Desktop/Master/Semester One/Data Management and Programming/git-101-2024/bank.csv", ";")
@@ -25,17 +25,18 @@ names(bank)
 
 ```
 
-Question 2:
+Question 2: Print the dimensions of data table
 ```{r}
 dim(bank)
 ```
 
-Question 3:
+Question 3: Print a summaryof data tabke
 ```{r}
 summary(bank)
 ```
+💡 One of the limitations of this summary is that it doesn't provide us detailed statistical informations about the variables. One of the main issues of it is that having individual elements is not very intuitive.Indeed, it doesn't give us any information about relations between variables (covaariance / correlations). In addition to that, summary output is very limited,it doesn't give us preview about p-value neither statistical test.
 
-## Elementary Operations
+## Filtering,  selecting and extracting
 
 ### Exercise 2:
 
