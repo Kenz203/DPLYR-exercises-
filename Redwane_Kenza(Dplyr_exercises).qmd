@@ -82,13 +82,22 @@ Question 3: Print the median age of the married clients.
 bank %>% select(marital, age) %>%
   filter(marital== 'married') %>% 
   summarise(median_age=median(age,na.rm = TRUE))
-
 ```
-
 
 ## Creating variables
 
-### Exercise 2:
+### Exercise 4:
 
-Question 1: Extract clients of the bank that are at least 50 years old.
+Question 1: Compute a new variable with the difference between the life expectancy of men and women.
 ```{r}
+life_expectancy <- read_delim("~/Desktop/Master/Semester One/Data Management and Programming/git-101-2024/life-expectancy-at-birth-who.csv")
+life_expectancy %>%
+  mutate(Difference = Male - Female )
+```
+
+Question 2: Compute a new variable with the relative difference between the life expectancy of men and women, that is the difference divided by the life expectancy for both sexes.
+```{r}
+life_expectancy %>%
+  mutate(Mean=(Difference = Male - Female)/ `Both sexes`)
+```
+
