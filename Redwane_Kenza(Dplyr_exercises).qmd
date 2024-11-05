@@ -3,6 +3,7 @@ title: "Dplyr (Exercises)"
 author: "Kenza Redwane"
 format: 
   html:
+  pdf: 
     code-fold: true
 ---
 
@@ -228,45 +229,67 @@ Question 1:Split the data set into data that describe each person and data relat
 credit_payment <-read_delim("/Users/macbookpro/Desktop/Master/Semester One/Data Management and Programming/default-of-credit-card-clients.csv")
 ```
 1. Table with the personal data such as the education level and the target variable default payment next month;
+
 ```{r}
 personal_data <- credit_payment |>
     select(ID,LIMIT_BAL,SEX,EDUCATION,MARRIAGE,AGE,`default payment next month`)
 ```
 
-
 2. Table with the repayment status (columns starting with PAY and not with PAY_AMT);
 ```{r}
-credit_default_repayment <- credit_payment |> select(ID,,matches("PAY_[0-9]"))
-
+repayment_status <- credit_payment %>%
+  select(ID,matches('PAY_[0-9]'))
 ```
-
 
 3. Table with the bill status (columns starting with BILL_AM
 ```{r}
-credit_default_bill <- credit_payment |> select(ID,,matches("BILL_AMT[0-9]"))
+bill_status <- credit_payment |> select(ID,,matches("BILL_AMT[0-9]"))
 
 ```
-
 
 4. Table with the payment status (columns starting with PAY_AMT).
 ```{r}
-
-credit_default_payment <- credit_payment |> select(ID,,matches("PAY_AMT[0-9]"))
+Payment_status <- credit_payment |> select(ID,,matches("PAY_AMT[0-9]"))
 ```
-
 
 Question 2: In each of the payment oriented table, rename the columns with the month to which the value is associated (use the month.name variable).
-```{r}
 
+```{r}
+names(repayment_status) <- c("ID",month.name[9:4])
+names(bill_status) <- c("ID",month.name[9:4])
+names(Payment_status) <- c("ID",month.name[9:4])
 ```
 
-
 Question 3:Reformat the payment tables in long form. Make sure that the new column names make sense (for instance base the names on Month and Delay or Amount).
+```{r}
+repayment_status |>
+    pivot_longer(-ID, names_to="Month_repayment", values_to="Delay_repayment")
+
+bill_status |>
+    pivot_longer(-ID, names_to="Month_bill", values_to="Amount_bill")
+
+Payment_status |>
+    pivot_longer(-ID, names_to="Month_payment", values_to="Amount_payment")
+```
 
 Question 4: Use the Long forms
 
-1.
+1.the percentage of users with late payment broken down by month (at late payment corresponds to a strictly positive value in the repayment status table);
+```{r}
+repayment_status |> filter(Delay_repayment>0) |>
+    group_by(Month_repayment) |>
+    summarise(n=n()/nrow(Delay_repayment))
+```
 
-2.
+2.the median amount of the bills, broken down by month;
+```{r}
+bill_status |> group_by(Month_bill) |>
+    summarise("Median Bill"=median(Amount_bill))
+```
 
-3.
+3.the maximal amount payed, broken down by month.
+```{r}
+credit_default_payment |> group_by(Month_payment) |>
+    summarise("Maximum payed"=max(Amount_payment))
+```
+
